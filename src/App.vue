@@ -61,11 +61,16 @@ export default {
   methods: {
     async submitVerify() {
       if (!this.token) return;
+      const url =
+        "https://turnstile-backend.gloria-enterprise-account.workers.dev/api/verify-turnstile";
+      const body = JSON.stringify({ token: this.token });
+      console.log("fetch url:", url);
+      console.log("fetch body:", body);
       try {
-        const res = await fetch('https://turnstile-backend.gloria-enterprise-account.workers.dev/api/verify-turnstile', {
+        const res = await fetch(url, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ token: this.token }),
+          body,
         });
         const data = await res.json();
         if (data.success) {
