@@ -33,7 +33,7 @@
 // 用户在 Vue 页面完成 Turnstile 验证，生成 token。
 // 点击“提交验证”按钮时，token 被 POST 到 /api/verify-turnstile。
 // Node.js 后端调用 Cloudflare siteverify API 验证 token，并返回结果给前端
-const apiBase = process.env.VUE_APP_API_BASE
+
 export default {
   data() {
     return {
