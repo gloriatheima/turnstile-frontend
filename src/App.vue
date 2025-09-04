@@ -62,7 +62,7 @@ export default {
     async submitVerify() {
       if (!this.token) return;
       try {
-        const res = await fetch(`${apiBase}/api/verify-turnstile`, {
+        const res = await fetch('https://turnstile-backend.gloria-enterprise-account.workers.dev/api/verify-turnstile', {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ token: this.token }),
