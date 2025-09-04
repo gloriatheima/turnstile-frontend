@@ -69,7 +69,10 @@ export default {
       try {
         const res = await fetch(url, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "X-Turnstile-Token": token, // 新增这一行主动添加一个request header头 || 企业版 WAF可以写 body 匹配规则，表达式如 (http.request.body contains "token")
+          },
           body,
         });
         const data = await res.json();
