@@ -72,18 +72,14 @@ export default {
           headers: {
             "Content-Type": "application/json",
             "x-turnstile-token": this.token, // 新增这一行主动添加一个request header头 || 企业版 WAF可以写 body 匹配规则，表达式如 (http.request.body contains "token")
-
+            // 在 Worker 返回的 headers 中加入
           },
           body,
         });
         const data = await res.json();
         if (data.success) {
           this.verifyMsg = "Turnstile 验证通过！";
-          const eid = data.ephemeral_id
-          if (eid){
-           localStorage.setItem('cf_eid', eid); 
-        console.log("设备 ID 已记录，后续请求将受到保护");
-          }
+          
         } else {
           // this.verifyMsg = "验证失败：" + (data.errors || "未知错误");
           this.verifyMsg =
