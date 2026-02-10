@@ -81,7 +81,8 @@ export default {
           this.verifyMsg = "Turnstile 验证通过！";
           const eid = data.ephemeral_id
           if (eid){
-            res.set('x-turnstile-eid', eid)
+           localStorage.setItem('cf_eid', eid); 
+        console.log("设备 ID 已记录，后续请求将受到保护");
           }
         } else {
           // this.verifyMsg = "验证失败：" + (data.errors || "未知错误");
