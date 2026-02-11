@@ -35,6 +35,9 @@
 // 点击“提交验证”按钮时，token 被 POST 到 /api/verify-turnstile。
 // Node.js 后端调用 Cloudflare siteverify API 验证 token，并返回结果给前端
 
+
+
+
 export default {
   data() {
     return {
@@ -75,6 +78,7 @@ export default {
             "Content-Type": "application/json",
             "x-turnstile-token": this.token, // 新增这一行主动添加一个request header头 || 企业版 WAF可以写 body 匹配规则，表达式如 (http.request.body contains "token")
             // 在 Worker 返回的 headers 中加入
+             "x-turnstile-eid": this.eid
           },
           body,
         });
@@ -82,6 +86,8 @@ export default {
         if (data.success) {
           this.verifyMsg = "Turnstile 验证通过！";
           console.log('CF后端返回的data数据：',data);
+          this.eid = data.ephemeral_id
+          console.log('eid',this.eid);
           
         } else {
           // this.verifyMsg = "验证失败：" + (data.errors || "未知错误");
