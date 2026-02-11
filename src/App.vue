@@ -24,6 +24,7 @@
     <div v-if="token" class="token-block">
       <span class="token-label">Token:</span>
       <span class="token-value">{{ token }}</span>
+      <span class="eid-value">{{ eid }}</span>
     </div>
   </div>
 </template>
@@ -37,6 +38,7 @@
 export default {
   data() {
     return {
+      eid:'',
       token: "",
       verifyMsg: "",
       colorFlag: true,
@@ -79,6 +81,7 @@ export default {
         const data = await res.json();
         if (data.success) {
           this.verifyMsg = "Turnstile 验证通过！";
+          console.log('CF后端返回的data数据：',data);
           
         } else {
           // this.verifyMsg = "验证失败：" + (data.errors || "未知错误");
