@@ -77,8 +77,8 @@ export default {
           headers: {
             "Content-Type": "application/json",
             "x-turnstile-token": this.token, // 新增这一行主动添加一个request header头 || 企业版 WAF可以写 body 匹配规则，表达式如 (http.request.body contains "token")
-            // 在 Worker 返回的 headers 中加入
-             "x-turnstile-eid": this.eid
+           
+            
           },
           body,
         });
